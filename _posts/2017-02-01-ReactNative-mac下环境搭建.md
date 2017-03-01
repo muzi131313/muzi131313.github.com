@@ -23,10 +23,12 @@ export NVM_DIR="/Users/liyanfeng/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 </pre>
 5.安装node:<br/>
+<pre>
 nvm install node && nvm alias default node;
+</pre>
 
 6.获取权限:<br/>
-</pre>
+<pre>
 sudo chown -R $USER /user/local/lib
 sudo chown -R $USER /user/local
 </pre>
