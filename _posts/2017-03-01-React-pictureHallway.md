@@ -22,7 +22,9 @@ npm install -g generator-react-webpack
 </pre>
 
 4.创建初始化项目:<br/>
+<pre>
 yo react-webpack your-project-name
+</pre>
 
 5.脚手架说明:<br/>
 .editorconfig: 不同编辑器统一风格,<a href="http://editorconfig.org">官网</a><br/>
@@ -36,7 +38,9 @@ webpack.config.js:webpack开发环境配置<br/>
 webpack.dist.config.js:webpack生产环境配置<br/>
 
 6.react全局对象:<br/>
+<pre>
 \_\_REACT\_DEVTOOLS\_GLOBAL\_HOOK\_\_
+</pre>
 
 7.webpack配置:<br/>
 <a href="webpack.github.io">官网</a><br/>
