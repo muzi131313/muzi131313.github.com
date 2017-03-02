@@ -51,19 +51,19 @@ cache:true: 增量编译<br/>
 debug:true: 调试模式<br/>
 devtool:'sourcemap': <br/>
 stats: {<br/>
-	colors: true, // 颜色<br/>
-	reasons: true // 为什么被引入<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colors: true, // 颜色<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reasons: true // 为什么被引入<br/>
 }: 输入相关<br/>
 
 webpack-dev-server:{
 	hot: true, // 热部署
 }<br/>
 plugins: {<br/>
-	DedupePlugin(): 检测相似文件、或者文件中重复内容<br/>
-	UglifyJsPlugin(): 压缩输出<br/>
-	OccurenceOrderPlugin(): 根据引用频率决定bind-id，越频繁、值越短，达到减小文件目的<br/>
-	AggressiveMergingPlugin(): 用来优化生成的代码chunk，合并相同代码，提取公共的相同的代码片段<br/>
-	NoErrorsPlugin(): 保证编译不会出错<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DedupePlugin(): 检测相似文件、或者文件中重复内容<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UglifyJsPlugin(): 压缩输出<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OccurenceOrderPlugin(): 根据引用频率决定bind-id，越频繁、值越短，达到减小文件目的<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AggressiveMergingPlugin(): 用来优化生成的代码chunk，合并相同代码，提取公共的相同的代码片段<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NoErrorsPlugin(): 保证编译不会出错<br/> 
 }
 >##ps:备注<br/>
 >1.dev模式下,output生成在内存中，而非磁盘中<br/>
