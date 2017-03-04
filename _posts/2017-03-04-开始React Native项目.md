@@ -21,6 +21,14 @@ adb devices
 <pre>
 adb reverse tcp:8081 tcp:8081
 </pre>
+4.3.adb配置:
+<pre>
+touch .bash_profile
+open -e .bash_profile
+export PATH=${PATH}:~/Library/Android/sdk/platform-tools
+</pre>
+adb路径:~/Library/Android/sdk/platform-tools
+
 
 5.编译项目:
 <pre>
@@ -31,3 +39,13 @@ react-native run-android
 <pre>
 react-native start
 </pre>
+6.1.启动时端口占用:
+<pre>
+lsof -i :8081
+kill -9 <PID>
+</pre>
+
+>1.调试的时候,勾选Pause On Caught Exceptions<br/>
+>2.然后在debuggerWorker.js下有localhost:8081文件夹,项目的文件都在此下面,然后就可以勾选打断点了<br/>
+
+>楼主的环境是mac
