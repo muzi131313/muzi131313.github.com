@@ -1,3 +1,4 @@
+
 1.初始化一个React Native项目:<br/>
 <pre>
 react-native init project1
