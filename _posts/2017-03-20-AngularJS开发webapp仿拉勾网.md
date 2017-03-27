@@ -92,9 +92,43 @@ gulp.task('serve', function () {
 > [gulp具体配置](https://github.com/muzi131313/angularjs_employee/blob/master/gulpfile.js)
 
 ##4.路由配置
-- 知识点
 
-> [ui.router](http://runjs.cn/code/74vszpdz)<br/>
-> [路由参数](http://runjs.cn/code/zey9cp7w)<br/>
-> 重要指令和服务: ui-sref, $state
+- [ui.router](http://runjs.cn/code/74vszpdz)<br/>
+
+````
+'use strict'
+
+angular.module('app').config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+	$stateProvider.state('main', {
+		url: '/main',
+		templateUrl: 'view/main.html',
+		controller: 'mainCtrl'
+	})
+	$urlRouterProvider.otherwise('main');
+}]);
+````
+
+- [路由参数](http://runjs.cn/code/zey9cp7w)<br/>
+
+````
+'/home'				--> '/home'
+
+'/home/:id'			--> '/home/123'
+'/home/{id}'		--> '/home/123'
+
+'/home/detail?id=123'	--> 非restful传参
+````
+
+- 重要指令和服务: [ui-sref](https://ui-router.github.io/ng1/docs/latest/modules/directives.html#uisref), [$state](https://ui-router.github.io/ng1/docs/latest/modules/directives.html#uistate),[directive](https://ui-router.github.io/ng1/docs/latest/modules/directives.html#uisref)
+
+```
+// html: 页面跳转
+<a ui-sref="main({id: contact.id})" ng-bind="contact.name"></a>
+// html
+<a ui-sref="contacts.detail({id: contact.id})" ng-bind="contact.name"></a>
+// js: 服务定义,replace: 消除当前路径,调回时不会再回到当前页面
+$state.go('contacts.detail', {id: contact.id}, {location: 'replace'})
+// 参数获取
+$state.params.id <===> $stateParams.id
+```
 
