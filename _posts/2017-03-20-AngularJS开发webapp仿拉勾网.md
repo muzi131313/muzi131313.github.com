@@ -132,3 +132,57 @@ $state.go('contacts.detail', {id: contact.id}, {location: 'replace'})
 $state.params.id <===> $stateParams.id
 ```
 
+##5.模板和控制器之间的解耦
+- 5.1.在自定义模板时指定scope作用域
+
+````
+'use strict';
+
+// appPositionList,在html中对应app-position-list
+angular.module('app').directive('appPositionList', [function () {
+	return {
+		restrict: 'A',
+		replace: true,
+		templateUrl: 'view/template/positionList.html',
+		// 修改scope,暴露data接口,降低模板和控制器之间的耦合
+		scope: {
+			data: '='
+		},
+		link: function (scope, iElement, iAttrs) {
+			
+		}
+	};
+}]);
+````
+
+- 模板定义时使用暴露的数据data
+
+````
+<ul class="position-list bg-w">
+	<!-- 修改scope,暴露data接口,降低模板和控制器之间的耦合-->
+	<li class="item" ng-repeat="job in data">
+		<img alt="" class="logo f-l" ng-src="{{job.imgSrc}}">
+		<h3 class="title" ng-bind="job.name">WEB前端</h3>
+		<p class="desc" ng-bind="job.companyName+'['+job.city+']'+job.industry">
+			慕课网[北京]互联网
+		</p>
+		<p class="desc" ng-bind="job.time">2017-04-03 10:09:08</p>
+	</li>
+</ul>
+````
+
+- 使用时，传入控制器中指定data的属性值
+
+````
+<div app-position-list data="jobList"></div>
+$scope.jobList = [{
+	id: 1,
+	name: 'WEB前端',
+	imgSrc: 'image/company-1.png',
+	companyName: '慕课网',
+	city: '北京',
+	industry: '互联网',
+	time: '2017-04-03 10:09:08'
+}]
+````
+
