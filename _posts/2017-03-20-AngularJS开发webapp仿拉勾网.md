@@ -186,3 +186,19 @@ $scope.jobList = [{
 }]
 ````
 
+##6.名词释义
+- 数据绑定(data-binding)
+
+> 在angular应用中，自动同步组件组件和数据之间的行为
+
+- 指令(redirective)
+
+> 1.通过html标签、属性、样式或注释使angular编译器来为指定dom元素绑定特定行为,甚至改变dom和它的子元素<br/>
+> 2.内置指令:ng-model,ng-bind,ng-click,ng-class,ng-if,ng-hide,ng-repeat, [示例](http://runjs.cn/code/st3wtuie)<br/>
+> 3.自定义指令:
+`scope:继承父scope,子类scope发生变化,不会影响父类scope;暴露接口;@:是一个常量;=:是一个变量;&:是一个回调函数`
+
+- 
+
+
+
