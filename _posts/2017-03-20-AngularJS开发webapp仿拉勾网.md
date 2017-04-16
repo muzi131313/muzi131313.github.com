@@ -18,6 +18,7 @@ a:active{text-decoration: none;}
 ## 1.单页应用的特点
 - 页面不刷新
 - 依靠监听hash值进行页面之间的切换
+- 所有的js，css打包到一个文件中去
 
 ## 2.gulp打包的依赖
 - gulp
@@ -30,6 +31,7 @@ a:active{text-decoration: none;}
 - gulp-load-plugins
 - gulp-uglify
 - open
+- gulp-plumber: css编译错误,不会中断进程,而是抛出错误
 
 ##3.编写gulpfile.js文件
 - $的使用
@@ -195,10 +197,126 @@ $scope.jobList = [{
 
 > 1.通过html标签、属性、样式或注释使angular编译器来为指定dom元素绑定特定行为,甚至改变dom和它的子元素<br/>
 > 2.内置指令:ng-model,ng-bind,ng-click,ng-class,ng-if,ng-hide,ng-repeat, [示例](http://runjs.cn/code/st3wtuie)<br/>
+> > ng-show: 控制是否显示; ng-if: 控制是否存在
+
 > 3.自定义指令:
 `scope:继承父scope,子类scope发生变化,不会影响父类scope;暴露接口;@:是一个常量;=:是一个变量;&:是一个回调函数`
 
-- 
+
+##7.控制器（controller）和作用域($scope)
+- 控制器: 视图对应的业务逻辑,为数据模型添加行为和属性
+
+> **常用属性**:  
+> 1.`$id`:和$scope一一对应，一般是一个值  
+> 2.`$parent`:$scope的父作用域,嵌套、或指令  
+> 3.`$root`:$rootScope  
+> **常用函数:**  
+> 1.`$watch`:监控$scope上的属性发生变化（尽量少用,太多会影响性能）  
+> 2.`$on`:接收事件  
+> 3.`$broadcast`:向下进行广播  
+> 4.`$emit`:向上广播  
+> 5.`$digest`:双向数据绑定失效时  
+> ***<1>.广播时，需要考虑事件的接收方是不是已经初始化完成***  
+> ***<2>.绝对、绝对、绝对不要在controller中操作原生dom；如需,要么通过scope数据绑定;要么通过指令来操作***  
+> ***<3>.用原生操作dom后,若数据双向绑定失效,可以用$digest()来同步一下***  
+
+##8.服务(service)和服务工厂(factory)
+- 特点：  
+
+>单例、懒加载、公用函数
+
+- 常用服务：  
+
+> 1.$scope: 全局作用域  
+> 2.$state: 获取参数`$state.params`  
+> 3.$http: 网络请求(支持promise语法)  
+
+> ````
+> $http({url:'test.json', method: 'get'}).then(function(resp){
+> 	// success callback
+> }, function(){
+> 	// error callbck
+> })
+> ````
+
+> 4.$q: 解决延迟加载,以及提供promise服务  
+> 
+> ````
+> var functionA(){
+> 	var def = $q.defer();
+> 	setTimeout(function(){
+> 		if(true){ // do something right
+> 			def.resolve(); // success
+> 		}else{
+> 			def.reject(); // err
+> 		}
+> 	}, 1000);
+> 	return def.promise;
+> }
+> 
+> var functionB(){
+> 	var def = $q.defer();
+> 	setTimeout(function(){
+> 		if(true){ // do something right
+> 			def.resolve(); // success
+> 		}else{
+> 			def.reject(); // err
+> 		}
+> 	}, 1000);
+> 	return def.promise;
+> }
+> 
+> $q.all([functionA(), functionB()]).then(function(result){
+> 	// do something after the functionA and functionB was resoved
+> 	// result's value was the functionA's and functionB's translated result
+> })
+> ````
+> 
+> 5.$timeout: 等同于js中timeout  
+> 6.$interval: 等同于js中interval  
+> 7.$rootScope: 定义公共的函数和变量,所有的子级scope都可以访问到
+
+````
+angular.module('app', ['ui.router']).run(['$rootScope', function($rootScope){
+	$rootScope.im = function(){
+		console.log('hello, im');
+	}
+}]);
+````
+
+- 自定义服务：  
+
+> cache:
+
+````
+// servie模式
+angular.module('app').service('cache', ['$cookies', function ($cookies) {
+	this.put = function (key, value) {
+		$cookies.put(key, value);	
+	};
+	this.get = function (key) {
+		return $cookies.get(key);
+	};
+	this.remove = function (key) {
+		$cookies.remove(key);
+	};
+}]);
+
+// 工厂模式: 可以设置私有属性
+angular.module('app').factory('cache', ['$cookies', function ($cookies) {
+	return {
+		put: function (key, value) {
+			$cookies.put(key, value);
+		},
+		get: function (key) {
+			return $cookies.get(key);
+		},
+		remove: function (key) {
+			$cookies.remove(key);
+		}
+	};
+}]);
+````
 
 
 
