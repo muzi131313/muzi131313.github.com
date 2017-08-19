@@ -320,4 +320,76 @@ angular.module('app').factory('cache', ['$cookies', function ($cookies) {
 ````
 
 
+##9 fitler过滤器
 
+### 定义,以及总结
+
+- 定义: 用来格式化或者过滤数据
+- 常用过滤器: [currency](https://code.angularjs.org/1.6.3/docs/api/ng/filter/currency), [number](https://code.angularjs.org/1.6.3/docs/api/ng/filter/number), [date](https://code.angularjs.org/1.6.3/docs/api/ng/filter/date),[lowercase](https://code.angularjs.org/1.6.3/docs/api/ng/filter/lowercase),[uppercase](https://code.angularjs.org/1.6.3/docs/api/ng/filter/uppercase),[limitTo](https://code.angularjs.org/1.6.3/docs/api/ng/filter/limitTo),[orderBy](https://code.angularjs.org/1.6.3/docs/api/ng/filter/orderBy) 
+- 过滤器后的参数, 使用`:`相隔, 示例如下:
+
+````
+// currency, 第一个是格式化前的符号, 第二个是小数的位数
+{{ 1.234 | currency : '$' : 0 }}
+// number(格式化后具有四舍五入的操作), 第一个参数是小数的位数
+{{ 12.345 | number : 2 }}
+// 第一个参数是date的格式化格式
+{{ 1288323623006 | date : 'yyyy-MM-dd HH:mm:ss'}}
+// 对数组/字符串/数字进行分割, 第一个参数是要取数组的位数
+{{ numbers | limitTo: numLimit }}
+// 加上[-]符号,是降序(默认是升序), 过滤器可以叠加
+<li ng-repeat="friend in friends | orderBy: '-age' | limitTo : 3">
+	{{ friend.age }}
+	{{ friend.name }}
+</li>
+````
+
+- js代码中引入系统过滤器, 过滤器本身名字+Filter
+
+````
+// html
+{{ text }}
+// js
+angular.module('app').directive('appPositionList', ['limitToFilter' '$scope', function (limitToFilter, $scope) {
+	$scope.text = limitToFilter(12345, 3);
+}]);
+````
+
+### 使用示例
+- 创建一个自定义过滤器, [示例](http://runjs.cn/code/lljkbiuk)
+
+````
+// js
+'use strict';
+
+angular.module('app').filter('filterByObj', [function () {
+    return function (list, obj) {
+        var result = [];
+        if (!list) return result;
+        // console.log('params: ', list, obj);
+        angular.forEach(list, function (item) {
+            var isEqual = true;
+            for (var e in obj) {
+                // console.log('item, obj[e]', item, obj[e]);
+                if (item[e] !== obj[e]) {
+                    isEqual = false;
+                }
+            }
+            if (isEqual) {
+                result.push(item);
+            }
+        });
+        console.log('result: ', result);
+        return result;
+    }
+}]);
+````
+
+- 使用这个过滤器
+
+````
+<!-- html, data作为是第一个参数,对应list, 
+	 filterObj组件对外开放接口字段, 做为第二个参数 -->
+<li ng-repeat="job in data | filterByObj:filterObj">
+</li>
+````
