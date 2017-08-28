@@ -1,6 +1,6 @@
 ---
 layout: post
-title: AngularJS Webapp
+title: AngularJS 仿拉钩网Webapp
 tags:
 - AngularJS
 - roastwind
@@ -33,7 +33,7 @@ a:active{text-decoration: none;}
 - open
 - gulp-plumber: css编译错误,不会中断进程,而是抛出错误
 
-##3.编写gulpfile.js文件
+## 3.编写gulpfile.js文件
 - $的使用
 
 ````
@@ -91,9 +91,10 @@ gulp.task('serve', function () {
 });
 ````
 
-> [gulp具体配置](https://github.com/muzi131313/angularjs_employee/blob/master/gulpfile.js)
+> [gulp具体配置](https://github.com/muzi131313/angularjs_employee/blob/master/gulpfile.js)  
 
-##4.路由配置
+
+## 4.路由配置
 
 - [ui.router](http://runjs.cn/code/74vszpdz)<br/>
 
@@ -132,9 +133,10 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function (
 $state.go('contacts.detail', {id: contact.id}, {location: 'replace'})
 // 参数获取
 $state.params.id <===> $stateParams.id
-```
+```  
 
-##5.模板和控制器之间的解耦
+## 5.模板和控制器之间的解耦
+
 - 5.1.在自定义模板时指定scope作用域
 
 ````
@@ -188,7 +190,7 @@ $scope.jobList = [{
 }]
 ````
 
-##6.名词释义
+## 6.名词释义
 - 数据绑定(data-binding)
 
 > 在angular应用中，自动同步组件组件和数据之间的行为
@@ -204,7 +206,7 @@ $scope.jobList = [{
 > > 指令必须有一个***根dom元素***
 
 
-##7.控制器（controller）和作用域($scope)
+## 7.控制器（controller）和作用域($scope)
 - 控制器: 视图对应的业务逻辑,为数据模型添加行为和属性
 
 > **常用属性**:  
@@ -221,7 +223,7 @@ $scope.jobList = [{
 > ***<2>.绝对、绝对、绝对不要在controller中操作原生dom；如需,要么通过scope数据绑定;要么通过指令来操作***  
 > ***<3>.用原生操作dom后,若数据双向绑定失效,可以用$digest()来同步一下***  
 
-##8.服务(service)和服务工厂(factory)
+## 8.服务(service)和服务工厂(factory)
 - 特点：  
 
 >单例、懒加载、公用函数
@@ -320,7 +322,7 @@ angular.module('app').factory('cache', ['$cookies', function ($cookies) {
 ````
 
 
-##9 fitler过滤器
+## 9 fitler过滤器
 
 ### 定义,以及总结
 
@@ -393,3 +395,8 @@ angular.module('app').filter('filterByObj', [function () {
 <li ng-repeat="job in data | filterByObj:filterObj">
 </li>
 ````
+
+## 10.表单相关
+
+- [angular-validation](https://github.com/hueitan/angular-validation) / [npm地址](https://www.npmjs.com/package/angular-validation) : 表单校验用
+- validationProvider: 所有的Provider都是一样的,对模块/服务进行配置
