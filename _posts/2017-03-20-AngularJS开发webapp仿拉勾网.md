@@ -400,3 +400,54 @@ angular.module('app').filter('filterByObj', [function () {
 
 - [angular-validation](https://github.com/hueitan/angular-validation) / [npm地址](https://www.npmjs.com/package/angular-validation) : 表单校验用
 - validationProvider: 所有的Provider都是一样的,对模块/服务进行配置
+
+## 11.开发流程总结
+
+- 1.1.配置工具: gulp/bower/less/angular-devtool
+- 1.2.引入第三方依赖: angular/ui.router/validation/ngCookies
+- 1.3.配置路由、编写视图和逻辑: view/controller/directive
+
+- 2.1.快速构建: yeomen(生成器)
+
+- 2.2.比较有名的两个种子项目
+> 1.angular-seed  
+> 2.generator-angular  
+
+- 2.3.安装示例
+
+````
+npm i -g yo
+yo
+// 选择install a generator 
+angular-seed
+````
+
+- 3.动画创建
+- 3.1.通过[animate.css](https://github.com/daneden/animate.css)创建简单css
+- 3.2.通过[angular-animate](): ng-enter,ng-leave创建复杂动画
+- 3.3.[angular-animate](https://www.npmjs.com/package/angular-animate): 如果需要大量动画,模块名为
+
+> 3.3.1.安装[angular-animate](https://www.npmjs.com/package/angular-animate): 
+ ````
+ bower install angular-animate --save
+ ````  
+> 3.3.2.[ngAnimate](https://code.angularjs.org/1.6.6/docs/api/ngAnimate)
+
+- 4.进一步的学习
+
+> 4.1.[开发者指南](https://code.angularjs.org/1.6.6/docs/guide), [api文档](https://code.angularjs.org/1.6.6/docs/#)  
+> 4.2.书籍《AngularJS权威教程》  
+> 4.3.[AngularJS中文社区](http://www.angularjs.cn/)
+
+## ps.注意点
+
+- 组件之间传参,注意在使用的时候参数驼峰的问题
+
+````
+// 向外暴露的参数名字为：isActive
+scope: {
+    isActive: '='
+},
+// 使用的时候需要：is-active写成这样传参
+<div app-position-info is-active="isActive"></div>
+````
