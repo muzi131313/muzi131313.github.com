@@ -19,4 +19,17 @@
     systemctl enable docker
     # 查看Docker信息
     docker info
+
+    # 配置加速器 ===== start ======
+    curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://bc437cce.m.daocloud.io docker version >= 1.12
+    # 重启docker
+    systemctl restart docker
+    # 关闭docker
+    systemctl stop docker
+    # 查看docker服务
+    ps -ef|grep docker
+    # 启动docker
+    systemctl  start docker
+    # 查看docker服务是否启动
+    ps -ef|grep docker
     ````
